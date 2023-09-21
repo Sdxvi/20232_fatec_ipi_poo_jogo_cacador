@@ -2,13 +2,9 @@ import java.util.Random;
 public class Jogo {
     public static void main(String[] args) throws Exception {
         var gerador = new Random();
-        var personagem = new Personagem();
-        var soneca = new Personagem();
-        soneca.nome = "Itallo";
-        soneca.sono = 10;
-        soneca.energia = 0;
-        soneca.fome = 4;
-        personagem.nome = "Kleiton";
+        var personagem = new Personagem("Kleiton");
+        var soneca = new Personagem("Itallo", 0, 4, 10);
+
 
         while(true){
             int oQueFazer = gerador.nextInt(3); //[0...3[
@@ -23,24 +19,16 @@ public class Jogo {
                     personagem.dormir();
                     break;
             }
-            System.out.printf(
-            "e: %d, f: %d, s: %d \n", 
-            personagem.energia,
-            personagem.fome,
-            personagem.sono
-            );
+
+            personagem.exibirEstado();
+
             System.out.println("------------------");
             var oQueOSonecaVaiFazer = gerador.nextDouble();
             if (oQueOSonecaVaiFazer <= 0.8) soneca.dormir();
             else if (oQueOSonecaVaiFazer <= 0.9) soneca.comer();
             else soneca.cacar();
 
-            System.out.printf(
-            "e: %d, f: %d, s: %d \n", 
-            soneca.energia,
-            soneca.fome,
-            soneca.sono
-            );
+            soneca.exibirEstado();
 
             System.out.println("******************");
             Thread.sleep(5000);
